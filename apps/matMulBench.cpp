@@ -1,11 +1,17 @@
 #include <new>
+#include <random>
 #include <benchmark/benchmark.h>
+
 #include "multiply.h"
 
 class MatrixFixture : public ::benchmark::Fixture {
 public:
 
 	void SetUp(const ::benchmark::State& st) {
+		std::random_device rd;
+                std::mt19937 gen(rd());
+                std::uniform_real_distribution<> dis(-10.0, 10.0);
+
 		N = st.range(0);
 		M = st.range(1);
 		O = st.range(2);
@@ -15,11 +21,11 @@ public:
 
 		for (std::ptrdiff_t i = 0; i < N; i++)
 			for (std::ptrdiff_t k = 0; k < O; k++)
-				a[i * O + k] = 1;
+				a[i * O + k] = dis(gen);
 		
 		for (std::ptrdiff_t k = 0; k < O; k++)
 			for (std::ptrdiff_t j = 0; j < M; j++)
-				b[k * M + j] = 2;
+				b[k * M + j] = dis(gen);
 		 
 	}
 
