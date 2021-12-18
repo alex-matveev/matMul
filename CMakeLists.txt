@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(mulBench)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "-O3 -march=native")
+
+MESSAGE(STATUS "Using CXXFLAGS: ${CMAKE_CXX_FLAGS}")
+
+INCLUDE_DIRECTORIES(src)
+
+ADD_SUBDIRECTORY(src)
+ADD_SUBDIRECTORY(apps)
+
